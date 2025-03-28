@@ -10,22 +10,9 @@ python -m venv .venv
 . ./.venv/bin/active
 ```
 
-3. Create local.settings.json:
+3. Start app with core tools: `func start`
 
-```
-{
-  "IsEncrypted": false,
-  "Values": {
-    "FUNCTIONS_WORKER_RUNTIME": "python",
-    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
-    "SQLDB_Connection": "Server=localhost,1433;Database=DurableDB;User Id=sa;Password=pw123456; Encrypt=False"
-  }
-}
-```
-
-4. Start app with core tools: `func start`
-
-5. Start workflow:
+4. Start workflow:
 
 GET http://localhost:7071/api/workflows/workflow1
 

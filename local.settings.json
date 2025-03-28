@@ -1,0 +1,8 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "FUNCTIONS_WORKER_RUNTIME": "python",
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "SQLDB_Connection": "Server=localhost,1433;Database=DurableDB;User Id=sa;Password=pw123456; Encrypt=False"
+  }
+}

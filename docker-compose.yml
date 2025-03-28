@@ -7,8 +7,9 @@ services:
             - "1433:1433"
         environment:
             ACCEPT_EULA: "Y"
-            MSSQL_SA_PASSWORD: "pw123456"
+            MSSQL_SA_PASSWORD: "BugRepro202503"
             MSSQL_PID: "Developer"
+            MSSQL_COLLATION: "Latin1_General_100_BIN2_UTF8"
         volumes:
             - ./.mssql_data:/var/opt/mssql
 

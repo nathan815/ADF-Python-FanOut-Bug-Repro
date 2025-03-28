@@ -2,12 +2,15 @@
 
 ## How to run this
 
-1. Start mssql and azurite: `docker compose up -d`
+1. Start mssql and azurite: `docker compose up -d`. 
 
-2. Create virtual env and activate:
+Might need to restart mssql after some time. If there are errors in mssql logs try `docker compose restart mssql`
+
+2. Create virtual env:
 ```
 python -m venv .venv
-. ./.venv/bin/active
+source ./.venv/bin/activate
+pip install -r requirements.txt
 ```
 
 3. Start app with core tools: `func start`

@@ -40,13 +40,16 @@ workflow2 is a real workflow that we have, except I changed the step names to le
 
 The orchestration just gets stuck. No logs show up after below.
 
-In the Instances table, the "workflow_orchestrator" orchestration is running, but no "job_orchestrator" orchestrators are running.
-
 Condition that seems to cause this:
 
 Sibling nodes which each point to 1 or more nodes under them. This creates parallel chains of tasks.
 
 In other words: Two "fan-out" branches which in turn each lead to more tasks starting after they finish.
+
+### SQL Instances table
+In the Instances table, the "workflow_orchestrator" orchestration is running, but no "job_orchestrator" orchestrators are running:
+
+<img width="1008" alt="image" src="https://github.com/user-attachments/assets/32cd3559-4f70-4044-b311-b9bea57d2a09" />
 
 
 ### Logs for workflow1

@@ -33,7 +33,7 @@ The workflows are executed by the `workflow_orchestrator` orchestrator function,
 The workflows are defined in YAML in our system. For simplicity I've converted the YAML to python dicts inline in function_app.py.
 
 workflow1 is a fake workflow I made for this.
-workflow2 is a real workflow that we have, except I changed the step names to letters.
+workflow2 is a similar to a real workflow that we have, except I changed the step names to letters.
 
 
 ## workflow1

@@ -55,7 +55,22 @@ workflow2 = {
     ],
 }
 
-workflow_map = {w["name"]: w for w in [workflow1, workflow2]}
+# A more linear workflow - no issues with this one
+workflow3 = {
+    "name": "workflow3",
+    "steps": [
+        {"name": "step1", "success": ["step2"]},
+        {"name": "step2", "success": ["step3"]},
+        {"name": "step3", "success": ["step4"]},
+        {"name": "step4", "success": ["step5"]},
+        {"name": "step5", "success": ["step6"]},
+        {"name": "step6", "success": ["step7", "step8"]},
+        {"name": "step7"},
+        {"name": "step8"},
+    ],
+}
+
+workflow_map = {w["name"]: w for w in [workflow1, workflow2, workflow3]}
 
 
 myApp = df.DFApp(http_auth_level=func.AuthLevel.ANONYMOUS)
@@ -103,11 +118,11 @@ def workflow_orchestrator(context: df.DurableOrchestrationContext):
 
             new_job_id = yield context.call_activity("generate_job_id", step_name)
             logging.info(
-                f"Starting job_orchestrator sub-orch for step: {step_name} {step}"
+                f"Starting job_orchestrator sub-orch for step {step_name} with new ID {new_job_id} - step {step}"
             )
             task = context.call_sub_orchestrator("job_orchestrator", step, new_job_id)
             running_tasks[step_name] = task
-            logging.info(f"Started job_orchestrator for step: {step_name} {step}")
+            logging.info(f"Started job_orchestrator for step: {step_name} ID {new_job_id}")
 
         # wait for any running task to complete
         tasks = list(running_tasks.values())

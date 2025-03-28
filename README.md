@@ -33,8 +33,10 @@ The workflows are executed by the `workflow_orchestrator` orchestrator function,
 The workflows are defined in YAML in our system. For simplicity I've converted the YAML to python dicts inline in function_app.py.
 
 workflow1 is a fake workflow I made for this.
-workflow2 is a similar to a real workflow that we have, except I changed the step names to letters.
 
+workflow2 is a similar to a real workflow that we have, except I changed the step names to single letters.
+
+workflow3 is a more linear workflow. It does not have either of the bugs described below.
 
 ## workflow1
 
@@ -106,3 +108,7 @@ GitHub issue for this: https://github.com/Azure/azure-functions-durable-python/i
 [2025-03-28T06:55:48.695Z] Executed 'Functions.workflow_orchestrator' (Failed, Id=0c15ef3b-6c58-4eda-b8d2-6a1d1c7710a3, Duration=36ms)
 [2025-03-28T06:55:48.695Z] System.Private.CoreLib: Exception while executing function: Functions.workflow_orchestrator. Microsoft.Azure.WebJobs.Extensions.DurableTask: Orchestrator function 'workflow_orchestrator' failed: 'AtomicTask' object has no attribute 'append'.
 ```
+
+### workflow3
+
+Mostly linear until it branches out near the end. No issues with this one.

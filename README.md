@@ -6,8 +6,6 @@
 
 Wait until `docker compose ps` shows healthy for mssql.
 
-If there are errors in mssql container logs try `docker compose restart mssql`
-
 2. Create virtual env:
 ```
 python -m venv .venv

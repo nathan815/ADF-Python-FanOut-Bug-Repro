@@ -4,7 +4,9 @@
 
 1. Start mssql and azurite: `docker compose up -d`. 
 
-Might need to restart mssql after some time. If there are errors in mssql logs try `docker compose restart mssql`
+Wait until `docker compose ps` shows healthy for mssql.
+
+If there are errors in mssql container logs try `docker compose restart mssql`
 
 2. Create virtual env:
 ```

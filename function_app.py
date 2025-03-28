@@ -1,5 +1,4 @@
 from dataclasses import dataclass, field
-from http import HTTPMethod
 import logging
 import time
 from typing import Any
@@ -76,7 +75,7 @@ workflow_map = {w["name"]: w for w in [workflow1, workflow2, workflow3]}
 myApp = df.DFApp(http_auth_level=func.AuthLevel.ANONYMOUS)
 
 
-@myApp.route(methods=[HTTPMethod.GET], route="workflows/{workflowName}")
+@myApp.route(methods=["GET"], route="workflows/{workflowName}")
 @myApp.durable_client_input(client_name="client")
 async def start_workflow(req: func.HttpRequest, client: df.DurableOrchestrationClient):
     workflow_name = req.route_params.get("workflowName", None)

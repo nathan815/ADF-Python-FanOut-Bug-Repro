@@ -38,6 +38,14 @@ workflow2 is a real workflow that we have, except I changed the step names to si
 
 workflow3 is a more linear workflow. It does not hit either of the bugs described below.
 
+### New Finding
+**UPDATE:** I've found that if I comment out the "generate_job_id" activity, the orchestration does not hit either of these bugs. It seems the trigger sequence is: 
+1. Loop (for each of the 1 or more pending jobs):
+    1. Run Activity
+    2. Start Sub-Orchestation
+    3. Append task from #1.2 to `running_tasks`. 
+3. Call `context.task_any(running_tasks)` 💥
+
 ## workflow1
 
 The orchestration just gets stuck. No logs show up after below.
@@ -47,14 +55,6 @@ Condition that seems to cause this:
 Sibling nodes which each point to 1 or more nodes under them. This creates parallel chains of tasks.
 
 In other words: Two "fan-out" branches which in turn each lead to more tasks starting after they finish.
-
-### NEW FINDING
-**UPDATE:** I've found that if I comment out the "generate_job_id" activity, the orchestration does not hit either of these bugs. It seems the trigger sequence is: 
-1. Loop (for each of the 1 or more pending jobs):
-    1. Run Activity
-    2. Start Sub-Orchestation
-    3. Append task from #1.2 to `running_tasks`. 
-3. Call `context.task_any(running_tasks)` 💥
 
 ### SQL Instances table
 In the Instances table, the "workflow_orchestrator" orchestration is running, but no "job_orchestrator" orchestrators are running:

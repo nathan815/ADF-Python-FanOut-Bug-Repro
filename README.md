@@ -41,9 +41,9 @@ workflow3 is a more linear workflow. It does not hit either of the bugs describe
 ### New Finding
 **UPDATE:** I've found that if I comment out the "generate_job_id" activity, the orchestration does not hit either of these bugs. It seems the trigger sequence is: 
 1. Loop (for each of the 1 or more pending jobs):
-    1. Run Activity
-    2. Start Sub-Orchestation
-    3. Append task from #1.2 to `running_tasks`. 
+    1. Run an activity
+    2. Start a sub-orchestation
+    3. Append sub-orchestration task to `running_tasks`. 
 3. Call `context.task_any(running_tasks)` 💥
 
 ## workflow1

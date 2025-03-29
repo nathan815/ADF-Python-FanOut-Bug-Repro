@@ -26,17 +26,17 @@ GET http://localhost:7071/api/workflows/workflow2
 
 We execute a graph (DAG) of tasks using Durable Functions.
 
-We're using the SQL Server backend.
+We're using the SQL Server backend. We found that these issues also occur with the default Azure Storage backend.
 
 The workflows are executed by the `workflow_orchestrator` orchestrator function, which manages the execution of steps based on their dependencies. Each step is executed by `job_orchestrator` which in turn calls an activity `job_runner_activity`.
 
 The workflows are defined in YAML in our system. For simplicity I've converted the YAML to python dicts inline in function_app.py.
 
-workflow1 is a fake workflow I made for this.
+workflow1 is a mock workflow I made for this.
 
-workflow2 is a similar to a real workflow that we have, except I changed the step names to single letters.
+workflow2 is a real workflow that we have, except I changed the step names to single letters.
 
-workflow3 is a more linear workflow. It does not have either of the bugs described below.
+workflow3 is a more linear workflow. It does not hit either of the bugs described below.
 
 ## workflow1
 
@@ -47,6 +47,14 @@ Condition that seems to cause this:
 Sibling nodes which each point to 1 or more nodes under them. This creates parallel chains of tasks.
 
 In other words: Two "fan-out" branches which in turn each lead to more tasks starting after they finish.
+
+### NEW FINDING
+**UPDATE:** I've found that if I comment out the "generate_job_id" activity, the orchestration does not hit either of these bugs. It seems the trigger sequence is: 
+1. Loop (for each of the 1 or more pending jobs):
+    1. Run Activity
+    2. Start Sub-Orchestation
+    3. Append task from #1.2 to `running_tasks`. 
+3. Call `context.task_any(running_tasks)` 💥
 
 ### SQL Instances table
 In the Instances table, the "workflow_orchestrator" orchestration is running, but no "job_orchestrator" orchestrators are running:

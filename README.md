@@ -57,7 +57,9 @@ Sibling nodes which each point to 1 or more nodes under them. This creates paral
 In other words: Two "fan-out" branches which in turn each lead to more tasks starting after they finish.
 
 ### SQL Instances table
-In the Instances table, the "workflow_orchestrator" orchestration is running, but no "job_orchestrator" orchestrators are running:
+History table: See [workflow1_history_table.md](./workflow1_history_table.md)
+
+In the Instances table, the "workflow_orchestrator" orchestration is running, but none of the "job_orchestrator" sub-orchestrations are running:
 
 <img width="1008" alt="image" src="https://github.com/user-attachments/assets/32cd3559-4f70-4044-b311-b9bea57d2a09" />
 

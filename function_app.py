@@ -115,11 +115,11 @@ def workflow_orchestrator(context: df.DurableOrchestrationContext):
             step = pending_steps.pop(0)
             step_name = step["name"]
 
-            new_job_id = yield context.call_activity("generate_job_id", step_name)
+            new_job_id = "" #yield context.call_activity("generate_job_id", step_name)
             logging.info(
                 f"Starting job_orchestrator sub-orch for step {step_name} with new ID {new_job_id} - step {step}"
             )
-            task = context.call_sub_orchestrator("job_orchestrator", step, new_job_id)
+            task = context.call_sub_orchestrator("job_orchestrator", step)
             running_tasks[step_name] = task
             logging.info(f"Started job_orchestrator for step: {step_name} ID {new_job_id}")
 

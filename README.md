@@ -88,7 +88,7 @@ This workflow also gets stuck like workflow1, however it hits another bug first.
 
 Bug:
 
-It hits an AttributeError in context.task_any. `task_any` is calling append on an `AtomicTask` object, which does not have an `append` method. It expects it to be a list.
+It hits an AttributeError in `context.task_any`. Method `_add_to_open_tasks` is calling append on an `AtomicTask` object, which does not have an `append` method. It expects it to be a list.
 
 "Orchestrator function 'workflow_orchestrator' failed: 'AtomicTask' object has no attribute 'append'."
 

@@ -39,12 +39,13 @@ workflow2 is a real workflow that we have, except I changed the step names to si
 workflow3 is a more linear workflow. It does not hit either of the bugs described below.
 
 ### New Finding
-**UPDATE:** I've found that if I comment out the "generate_job_id" activity, the orchestration does not hit either of these bugs. It seems the trigger sequence is: 
-1. Loop (for each of the 1 or more pending jobs):
-    1. Run an activity
-    2. Start a sub-orchestation
-    3. Append sub-orchestration task to `running_tasks`. 
-3. Call `context.task_any(running_tasks)` 💥
+If I remove the call to start the "generate_job_id" activity, the orchestration does not hit the bugs. It seems the trigger sequence for the bugs in the ADF SDK is:
+1. Run an activity
+2. Start a sub-orchestation
+3. Append sub-orchestration task to `running_tasks`.
+4. Call `context.task_any(running_tasks)` 💥
+
+`task_any` is where the AttributeError append error happens. This might also be a hint into why the ADF SDK is getting stuck.
 
 ## workflow1
 
@@ -57,7 +58,7 @@ Sibling nodes which each point to 1 or more nodes under them. This creates paral
 In other words: Two "fan-out" branches which in turn each lead to more tasks starting after they finish.
 
 ### SQL Instances table
-History table: See [workflow1_history_table.md](./workflow1_history_table.md)
+History table: See [workflow1_history_table.md](./workflow1_history_table.md). It looks like all the tasks were marked as completed, so still no idea where it is getting stuck.
 
 In the Instances table, the "workflow_orchestrator" orchestration is running, but none of the "job_orchestrator" sub-orchestrations are running:
 

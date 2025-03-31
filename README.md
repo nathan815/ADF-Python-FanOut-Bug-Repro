@@ -49,7 +49,7 @@ If I remove the call to start the "generate_job_id" activity, the orchestration 
 
 ## workflow1
 
-The orchestration just gets stuck. No logs show up after below.
+The orchestration just gets stuck after enqueuing step6 and step7. No logs show up after below.
 
 Condition that seems to cause this:
 

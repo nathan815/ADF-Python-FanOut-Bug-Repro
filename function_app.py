@@ -6,198 +6,126 @@ import uuid
 import azure.functions as func
 import azure.durable_functions as df
 
-# *** NOTE: See README.md
+# Workflows
+define_workflows = [
+    {
+        "name": "workflow1",
+        "steps": [
+            {"name": "stepA", "success": ["stepB"]},
+            {"name": "stepB", "success": ["stepC", "stepD", "stepE"]},
+            {"name": "stepE"},
+            {"name": "stepC", "success": ["stepF"]},
+            {"name": "stepD", "success": ["stepG", "stepH"]},
+            {"name": "stepF"},
+            {"name": "stepG"},
+            {"name": "stepH", "success": ["stepI"]},
+            {"name": "stepI"}
+        ]
+    },
+    {
+        "name": "workflow2",
+        "steps": [
+            {"name": "stepA", "success": ["stepB", "stepC", "stepD", "stepE", "stepF"], "failure": ["stepZ"]},
+            {"name": "stepB", "failure": ["stepZ"]},
+            {"name": "stepC", "failure": ["stepZ"]},
+            {"name": "stepD", "failure": ["stepZ"]},
+            {"name": "stepE", "success": ["stepG", "stepH", "stepI"]},
+            {"name": "stepF", "failure": ["stepZ"]},
+            {"name": "stepG", "success": ["stepJ"], "failure": ["stepZ"]},
+            {"name": "stepH", "failure": ["stepZ"]},
+            {"name": "stepI", "failure": ["stepZ"]},
+            {"name": "stepJ", "success": ["stepK", "stepL", "stepM"], "failure": ["stepZ"]},
+            {"name": "stepK", "success": ["stepN"], "failure": ["stepZ"]},
+            {"name": "stepL", "failure": ["stepZ"]},
+            {"name": "stepM", "failure": ["stepZ"]},
+            {"name": "stepN", "success": ["stepO", "stepP"], "failure": ["stepZ"]},
+            {"name": "stepO", "success": ["stepQ", "stepR", "stepS"], "failure": ["stepZ"]},
+            {"name": "stepP", "success": ["stepT"], "failure": ["stepZ"]},
+            {"name": "stepQ", "failure": ["stepZ"]},
+            {"name": "stepR", "failure": ["stepZ"]},
+            {"name": "stepS", "failure": ["stepZ"]},
+            {"name": "stepT", "success": ["stepU", "stepV"], "failure": ["stepZ"]},
+            {"name": "stepU", "failure": ["stepZ"]},
+            {"name": "stepV", "failure": ["stepZ"]},
+            {"name": "stepZ"}
+        ]
+    },
+    {
+        "name": "workflow3",
+        "steps": [
+            {"name": "stepA", "success": ["stepB"]},
+            {"name": "stepB", "success": ["stepC"]},
+            {"name": "stepC", "success": ["stepD"]},
+            {"name": "stepD", "success": ["stepE"]},
+            {"name": "stepE", "success": ["stepF"]},
+            {"name": "stepF", "success": ["stepG", "stepH"]},
+            {"name": "stepG"},
+            {"name": "stepH"}
+        ]
+    }
+]
 
-
-workflow1 = {
-    "name": "workflow1",
-    "steps": [
-        {"name": "step1", "success": ["step2"]},
-        {"name": "step2", "success": ["step3", "step4", "step2.2"]},
-        {"name": "step2.2"},
-        {"name": "step3", "success": ["step5"]},
-        {"name": "step4", "success": ["step6", "step7"]},
-        {"name": "step5"},
-        {"name": "step6"},
-        {"name": "step7", "success": ["step8"]},
-        {"name": "step8"},
-    ],
-}
-
-workflow2 = {
-    "name": "workflow2",
-    "steps": [
-        {"name": "A", "success": ["B", "C", "D", "E", "F"], "failure": ["Z"]},
-        {"name": "B", "failure": ["Z"]},
-        {"name": "C", "failure": ["Z"]},
-        {"name": "D", "failure": ["Z"]},
-        {"name": "E", "success": ["G", "H", "I"]},
-        {"name": "F", "failure": ["Z"]},
-        {"name": "G", "success": ["J"], "failure": ["Z"]},
-        {"name": "H", "failure": ["Z"]},
-        {"name": "I", "failure": ["Z"]},
-        {"name": "J", "success": ["K", "L", "M"], "failure": ["Z"]},
-        {"name": "K", "success": ["N"], "failure": ["Z"]},
-        {"name": "L", "failure": ["Z"]},
-        {"name": "M", "failure": ["Z"]},
-        {"name": "N", "success": ["O", "P"], "failure": ["Z"]},
-        {"name": "O", "success": ["Q", "R", "S"], "failure": ["Z"]},
-        {"name": "P", "success": ["T"], "failure": ["Z"]},
-        {"name": "Q", "failure": ["Z"]},
-        {"name": "R", "failure": ["Z"]},
-        {"name": "S", "failure": ["Z"]},
-        {"name": "T", "success": ["U", "V"], "failure": ["Z"]},
-        {"name": "U", "failure": ["Z"]},
-        {"name": "V", "failure": ["Z"]},
-        {"name": "Y", "failure": ["Z"]},
-        {"name": "Z"},
-    ],
-}
-
-# A more linear workflow - no issues with this one
-workflow3 = {
-    "name": "workflow3",
-    "steps": [
-        {"name": "step1", "success": ["step2"]},
-        {"name": "step2", "success": ["step3"]},
-        {"name": "step3", "success": ["step4"]},
-        {"name": "step4", "success": ["step5"]},
-        {"name": "step5", "success": ["step6"]},
-        {"name": "step6", "success": ["step7", "step8"]},
-        {"name": "step7"},
-        {"name": "step8"},
-    ],
-}
-
-workflow_map = {w["name"]: w for w in [workflow1, workflow2, workflow3]}
-
+workflow_map = {w["name"]: w for w in define_workflows}
 
 myApp = df.DFApp(http_auth_level=func.AuthLevel.ANONYMOUS)
-
 
 @myApp.route(methods=["GET"], route="workflows/{workflowName}")
 @myApp.durable_client_input(client_name="client")
 async def start_workflow(req: func.HttpRequest, client: df.DurableOrchestrationClient):
     workflow_name = req.route_params.get("workflowName", None)
-    if not workflow_name:
-        return func.HttpResponse(
-            "Please provide a workflow name in the URL path.", status_code=400
-        )
-
-    try:
-        workflow = workflow_map[workflow_name]
-    except KeyError:
-        logging.error(f"Workflow '{workflow_name}' not found.")
-        return func.HttpResponse(
-            f"Workflow '{workflow_name}' not found.", status_code=404
-        )
-
-    logging.info("Starting workflow_orchestrator DF for: %s", workflow_name)
-    instance_id = await client.start_new("workflow_orchestrator", client_input=workflow)
-    response = client.create_check_status_response(req, instance_id)
-    return response
-
+    if not workflow_name or workflow_name not in workflow_map:
+        return func.HttpResponse(f"Workflow '{workflow_name}' not found.", status_code=404)
+    
+    logging.info("Starting workflow_orchestrator for: %s", workflow_name)
+    instance_id = await client.start_new("workflow_orchestrator", client_input=workflow_map[workflow_name])
+    return client.create_check_status_response(req, instance_id)
 
 @myApp.orchestration_trigger(context_name="context")
 def workflow_orchestrator(context: df.DurableOrchestrationContext):
     workflow = context.get_input()
-
     logging.info(f"Starting execution of workflow: {workflow['name']}")
 
-    # Initialize the current step
-    pending_steps = [workflow["steps"][0]]
-    running_tasks: dict[str, Any] = {}
-    completed_steps: list[dict] = []
+    step_map = {step["name"]: step for step in workflow["steps"]}
 
-    while pending_steps or running_tasks:
-        # start all pending steps
-        while pending_steps:
-            step = pending_steps.pop(0)
-            step_name = step["name"]
+    queue = [("stepA", True)]  # (step_name, is_successful)
+    while queue:
+        tasks = []
+        for step_name, is_successful in queue:
+            step = step_map.get(step_name, {})
 
-            new_job_id = yield context.call_activity("generate_job_id", step_name)
-            logging.info(
-                f"Starting job_orchestrator sub-orch for step {step_name} with new ID {new_job_id} - step {step}"
-            )
-            task = context.call_sub_orchestrator("job_orchestrator", step, new_job_id)
-            running_tasks[step_name] = task
-            logging.info(f"Started job_orchestrator for step: {step_name} ID {new_job_id}")
+            # Determine next steps based on success/failure
+            next_steps = step.get("success", []) if is_successful else step.get("failure", [])
 
-        # wait for any running task to complete
-        tasks = list(running_tasks.values())
-        logging.info(f"Waiting for one of these tasks to complete: {running_tasks}")
-        completed_task = yield context.task_any(tasks)
-        logging.info(
-            f"task_any returned task: {completed_task}"
-        )  # Log which task completed
-        step_result_out = completed_task.result
+            # Generate job ID and execute step
+            job_id = yield context.call_activity("generate_job_id", step_name)
+            step_result = context.call_sub_orchestrator("job_orchestrator", step_name)
+            tasks.append((step_result, next_steps))  # Store next steps along with task
 
-        if type(step_result_out) is not dict:
-            # Handle unexpected result type
-            logging.error(
-                f"Unexpected result type: {type(step_result_out)}. Expected dict. step_result_out: {step_result_out}"
-            )
-            raise Exception(
-                f"Unexpected result type from task_any. step_result: {step_result_out}"
-            )
+        # Wait for all tasks to complete
+        results = yield context.task_all([t[0] for t in tasks])
 
-        step_result = step_result_out
+        # Update queue with next steps based on results
+        queue = []
+        for (task_result, next_steps) in zip(results, [t[1] for t in tasks]):
+            is_successful = task_result.get("succeeded", False)
+            queue.extend([(step, is_successful) for step in next_steps])  # Include failure paths if needed
 
-        logging.info(f"Completed step: {step_result['step']}")
-        completed_steps.append(step_result)
-        del running_tasks[step_result["step"]["name"]]  # Remove from running tasks
-
-        # Enqueue next steps based on the completed step
-        next_steps = step_result["step"].get("always", []) + (
-            step_result["step"].get("success", [])
-            if step_result["succeeded"]
-            else step_result["step"].get("failure", [])
-        )
-
-        for next_step_name in next_steps:
-            next_step = next(
-                (s for s in workflow["steps"] if s["name"] == next_step_name), None
-            )
-            if next_step and next_step not in pending_steps:
-                # Only add to pending if it hasn't been started yet
-                logging.info(f"Enqueuing next step: {next_step['name']}")
-                pending_steps.append(next_step)
-            else:
-                logging.info(f"Skipping already pending step: {next_step['name']}")
-
-    logging.info(
-        f"Workflow is done. Completed step names: {[s['step']['name'] for s in completed_steps]}. Step results: {completed_steps}"
-    )
     return "Workflow completed"
-
 
 @myApp.orchestration_trigger(context_name="context")
 def job_orchestrator(context: df.DurableOrchestrationContext):
     step = context.get_input()
-
-    logging.info(
-        f"job_orchestrator: Starting execution for step: {step['name']}. "
-        f"Step details: {step}"
-    )
-
+    logging.info(f"Executing job_orchestrator for step: {step}")
     result = yield context.call_activity("job_runner_activity", step)
-
-    logging.info(
-        f"job_orchestrator: Received result for step: {step['name']}. Result: {result}"
-    )
-
     return result
 
-
 @myApp.activity_trigger(input_name="input")
-def job_runner_activity(input: dict) -> dict:
-    step = input
-    logging.info(f"Running step: {step['name']}")
-    time.sleep(2)  # Simulate some processing time
-    return {"step": step, "succeeded": True}
-
+def job_runner_activity(input: str) -> dict:
+    logging.info(f"Running step: {input}")
+    time.sleep(2)
+    return {"step": input, "succeeded": True}
 
 @myApp.activity_trigger(input_name="input")
 def generate_job_id(input: str) -> str:
-    logging.info(f"Generating new job ID for step: {input}")
+    logging.info(f"Generating job id for step: {input}")
     return str(uuid.uuid4())

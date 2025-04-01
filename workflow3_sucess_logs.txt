@@ -1,0 +1,189 @@
+Found Python version 3.10.12 (python3).
+
+Azure Functions Core Tools
+Core Tools Version:       4.0.6821 Commit hash: N/A +c09a2033faa7ecf51b3773308283af0ca9a99f83 (64-bit)
+Function Runtime Version: 4.1036.1.23224
+
+[2025-04-01T08:18:51.726Z] Worker process started and initialized.
+
+Functions:
+
+	start_workflow: [GET] http://localhost:7071/api/workflows/{workflowName}
+
+	generate_job_id: activityTrigger
+
+	job_orchestrator: orchestrationTrigger
+
+	job_runner_activity: activityTrigger
+
+	workflow_orchestrator: orchestrationTrigger
+
+For detailed output, run func with --verbose flag.
+[2025-04-01T08:18:56.405Z] Host lock lease acquired by instance ID '000000000000000000000000F642EE5B'.
+[2025-04-01T08:19:26.443Z] Executing 'Functions.start_workflow' (Reason='This function was programmatically called via the host APIs.', Id=ee742a96-18b9-44b4-8fef-c1ab6f98d6ea)
+[2025-04-01T08:19:26.515Z] Starting workflow_orchestrator for: workflow3
+[2025-04-01T08:19:26.618Z] Executed 'Functions.start_workflow' (Succeeded, Id=ee742a96-18b9-44b4-8fef-c1ab6f98d6ea, Duration=196ms)
+[2025-04-01T08:19:28.112Z] Executing 'Functions.workflow_orchestrator' (Reason='(null)', Id=195e01b3-88fb-4b86-83ab-363559d229b0)
+[2025-04-01T08:19:28.136Z] Starting execution of workflow: workflow3
+[2025-04-01T08:19:28.162Z] Executed 'Functions.workflow_orchestrator' (Succeeded, Id=195e01b3-88fb-4b86-83ab-363559d229b0, Duration=63ms)
+[2025-04-01T08:19:28.236Z] Executing 'Functions.generate_job_id' (Reason='(null)', Id=1d346fa9-61c2-4406-b151-31a821c70657)
+[2025-04-01T08:19:28.242Z] Generating job id for step: stepA
+[2025-04-01T08:19:28.242Z] Executed 'Functions.generate_job_id' (Succeeded, Id=1d346fa9-61c2-4406-b151-31a821c70657, Duration=7ms)
+[2025-04-01T08:19:28.271Z] Executing 'Functions.workflow_orchestrator' (Reason='(null)', Id=f3d4e2bb-bede-4d7b-9dbf-78882447ff5c)
+[2025-04-01T08:19:28.277Z] Starting execution of workflow: workflow3
+[2025-04-01T08:19:28.286Z] Executed 'Functions.workflow_orchestrator' (Succeeded, Id=f3d4e2bb-bede-4d7b-9dbf-78882447ff5c, Duration=19ms)
+[2025-04-01T08:19:28.315Z] Executing 'Functions.job_orchestrator' (Reason='(null)', Id=d33cf602-5498-445c-be01-98e3486410c1)
+[2025-04-01T08:19:28.321Z] Executing job_orchestrator for step: stepA
+[2025-04-01T08:19:28.322Z] Executed 'Functions.job_orchestrator' (Succeeded, Id=d33cf602-5498-445c-be01-98e3486410c1, Duration=8ms)
+[2025-04-01T08:19:28.342Z] Executing 'Functions.job_runner_activity' (Reason='(null)', Id=1feeeb42-fa02-4896-8533-26de2f4a0ed5)
+[2025-04-01T08:19:28.346Z] Running step: stepA
+[2025-04-01T08:19:30.350Z] Executed 'Functions.job_runner_activity' (Succeeded, Id=1feeeb42-fa02-4896-8533-26de2f4a0ed5, Duration=2008ms)
+[2025-04-01T08:19:30.375Z] Executing 'Functions.job_orchestrator' (Reason='(null)', Id=476064de-ad52-445c-b35f-4b93bf9dbea6)
+[2025-04-01T08:19:30.379Z] Executing job_orchestrator for step: stepA
+[2025-04-01T08:19:30.382Z] Executed 'Functions.job_orchestrator' (Succeeded, Id=476064de-ad52-445c-b35f-4b93bf9dbea6, Duration=7ms)
+[2025-04-01T08:19:30.399Z] Executing 'Functions.workflow_orchestrator' (Reason='(null)', Id=3567883d-ab03-438c-a769-4d8b3dac8f89)
+[2025-04-01T08:19:30.403Z] Starting execution of workflow: workflow3
+[2025-04-01T08:19:30.406Z] Executed 'Functions.workflow_orchestrator' (Succeeded, Id=3567883d-ab03-438c-a769-4d8b3dac8f89, Duration=9ms)
+[2025-04-01T08:19:30.416Z] Executing 'Functions.generate_job_id' (Reason='(null)', Id=9d90b075-b358-47bd-8ae6-1f0d2a9dcdfd)
+[2025-04-01T08:19:30.418Z] Generating job id for step: stepB
+[2025-04-01T08:19:30.418Z] Executed 'Functions.generate_job_id' (Succeeded, Id=9d90b075-b358-47bd-8ae6-1f0d2a9dcdfd, Duration=2ms)
+[2025-04-01T08:19:30.427Z] Executing 'Functions.workflow_orchestrator' (Reason='(null)', Id=9c8961c6-4541-464a-9dd1-d83dfeed9670)
+[2025-04-01T08:19:30.432Z] Starting execution of workflow: workflow3
+[2025-04-01T08:19:30.434Z] Executed 'Functions.workflow_orchestrator' (Succeeded, Id=9c8961c6-4541-464a-9dd1-d83dfeed9670, Duration=6ms)
+[2025-04-01T08:19:30.458Z] Executing 'Functions.job_orchestrator' (Reason='(null)', Id=eac162ea-cfe2-4cbe-896e-eb4fa69b3f52)
+[2025-04-01T08:19:30.462Z] Executing job_orchestrator for step: stepB
+[2025-04-01T08:19:30.463Z] Executed 'Functions.job_orchestrator' (Succeeded, Id=eac162ea-cfe2-4cbe-896e-eb4fa69b3f52, Duration=5ms)
+[2025-04-01T08:19:30.474Z] Executing 'Functions.job_runner_activity' (Reason='(null)', Id=2e64fedb-394b-4d1c-9780-563d5ab4517e)
+[2025-04-01T08:19:30.477Z] Running step: stepB
+[2025-04-01T08:19:32.479Z] Executed 'Functions.job_runner_activity' (Succeeded, Id=2e64fedb-394b-4d1c-9780-563d5ab4517e, Duration=2005ms)
+[2025-04-01T08:19:32.504Z] Executing 'Functions.job_orchestrator' (Reason='(null)', Id=22c2cde2-90ac-4bcb-9a2d-9a791bf93dc0)
+[2025-04-01T08:19:32.510Z] Executing job_orchestrator for step: stepB
+[2025-04-01T08:19:32.512Z] Executed 'Functions.job_orchestrator' (Succeeded, Id=22c2cde2-90ac-4bcb-9a2d-9a791bf93dc0, Duration=8ms)
+[2025-04-01T08:19:32.531Z] Executing 'Functions.workflow_orchestrator' (Reason='(null)', Id=d86d2e1e-287f-40f2-8d5e-eec39b87a338)
+[2025-04-01T08:19:32.538Z] Starting execution of workflow: workflow3
+[2025-04-01T08:19:32.540Z] Executed 'Functions.workflow_orchestrator' (Succeeded, Id=d86d2e1e-287f-40f2-8d5e-eec39b87a338, Duration=9ms)
+[2025-04-01T08:19:32.554Z] Executing 'Functions.generate_job_id' (Reason='(null)', Id=14e30812-48a7-4759-8caa-2cab5e6514cb)
+[2025-04-01T08:19:32.558Z] Generating job id for step: stepC
+[2025-04-01T08:19:32.558Z] Executed 'Functions.generate_job_id' (Succeeded, Id=14e30812-48a7-4759-8caa-2cab5e6514cb, Duration=5ms)
+[2025-04-01T08:19:32.577Z] Executing 'Functions.workflow_orchestrator' (Reason='(null)', Id=e40e1410-23ec-4a9a-bf02-ff8740967a5d)
+[2025-04-01T08:19:32.587Z] Starting execution of workflow: workflow3
+[2025-04-01T08:19:32.589Z] Executed 'Functions.workflow_orchestrator' (Succeeded, Id=e40e1410-23ec-4a9a-bf02-ff8740967a5d, Duration=13ms)
+[2025-04-01T08:19:32.609Z] Executing 'Functions.job_orchestrator' (Reason='(null)', Id=6245f3da-1fd0-45a6-8300-91c62112469d)
+[2025-04-01T08:19:32.615Z] Executing job_orchestrator for step: stepC
+[2025-04-01T08:19:32.617Z] Executed 'Functions.job_orchestrator' (Succeeded, Id=6245f3da-1fd0-45a6-8300-91c62112469d, Duration=8ms)
+[2025-04-01T08:19:32.634Z] Executing 'Functions.job_runner_activity' (Reason='(null)', Id=e63b06b7-dd65-4e4e-9ea3-3bc015034cf8)
+[2025-04-01T08:19:32.638Z] Running step: stepC
+[2025-04-01T08:19:34.642Z] Executed 'Functions.job_runner_activity' (Succeeded, Id=e63b06b7-dd65-4e4e-9ea3-3bc015034cf8, Duration=2008ms)
+[2025-04-01T08:19:34.657Z] Executing 'Functions.job_orchestrator' (Reason='(null)', Id=8dc3f803-16d8-45c1-bc10-0ff2d6efd0e1)
+[2025-04-01T08:19:34.662Z] Executing job_orchestrator for step: stepC
+[2025-04-01T08:19:34.662Z] Executed 'Functions.job_orchestrator' (Succeeded, Id=8dc3f803-16d8-45c1-bc10-0ff2d6efd0e1, Duration=5ms)
+[2025-04-01T08:19:34.675Z] Executing 'Functions.workflow_orchestrator' (Reason='(null)', Id=a256cb09-e94a-4d5d-8090-b4fbaf58d298)
+[2025-04-01T08:19:34.681Z] Starting execution of workflow: workflow3
+[2025-04-01T08:19:34.683Z] Executed 'Functions.workflow_orchestrator' (Succeeded, Id=a256cb09-e94a-4d5d-8090-b4fbaf58d298, Duration=8ms)
+[2025-04-01T08:19:34.695Z] Executing 'Functions.generate_job_id' (Reason='(null)', Id=7c2b97ab-b35f-414e-b922-61358fe76015)
+[2025-04-01T08:19:34.698Z] Generating job id for step: stepD
+[2025-04-01T08:19:34.699Z] Executed 'Functions.generate_job_id' (Succeeded, Id=7c2b97ab-b35f-414e-b922-61358fe76015, Duration=3ms)
+[2025-04-01T08:19:34.711Z] Executing 'Functions.workflow_orchestrator' (Reason='(null)', Id=008d5539-b25c-4000-aab4-d8ec15af9038)
+[2025-04-01T08:19:34.720Z] Starting execution of workflow: workflow3
+[2025-04-01T08:19:34.722Z] Executed 'Functions.workflow_orchestrator' (Succeeded, Id=008d5539-b25c-4000-aab4-d8ec15af9038, Duration=11ms)
+[2025-04-01T08:19:34.743Z] Executing 'Functions.job_orchestrator' (Reason='(null)', Id=88cac639-ffa9-45df-ac10-65839fe6726d)
+[2025-04-01T08:19:34.749Z] Executing job_orchestrator for step: stepD
+[2025-04-01T08:19:34.750Z] Executed 'Functions.job_orchestrator' (Succeeded, Id=88cac639-ffa9-45df-ac10-65839fe6726d, Duration=8ms)
+[2025-04-01T08:19:34.765Z] Executing 'Functions.job_runner_activity' (Reason='(null)', Id=73fa0b8c-7493-4d8d-90fe-b62be7c385b0)
+[2025-04-01T08:19:34.768Z] Running step: stepD
+[2025-04-01T08:19:36.771Z] Executed 'Functions.job_runner_activity' (Succeeded, Id=73fa0b8c-7493-4d8d-90fe-b62be7c385b0, Duration=2005ms)
+[2025-04-01T08:19:36.786Z] Executing 'Functions.job_orchestrator' (Reason='(null)', Id=85b71352-9826-46e8-a959-b8cf4dc18c6b)
+[2025-04-01T08:19:36.792Z] Executing job_orchestrator for step: stepD
+[2025-04-01T08:19:36.793Z] Executed 'Functions.job_orchestrator' (Succeeded, Id=85b71352-9826-46e8-a959-b8cf4dc18c6b, Duration=8ms)
+[2025-04-01T08:19:36.810Z] Executing 'Functions.workflow_orchestrator' (Reason='(null)', Id=65b00417-7b31-4942-9a84-4e15527a36f6)
+[2025-04-01T08:19:36.818Z] Starting execution of workflow: workflow3
+[2025-04-01T08:19:36.824Z] Executed 'Functions.workflow_orchestrator' (Succeeded, Id=65b00417-7b31-4942-9a84-4e15527a36f6, Duration=14ms)
+[2025-04-01T08:19:36.842Z] Executing 'Functions.generate_job_id' (Reason='(null)', Id=a76ce9ad-9219-4a96-af02-14364f2a5a8f)
+[2025-04-01T08:19:36.846Z] Generating job id for step: stepE
+[2025-04-01T08:19:36.847Z] Executed 'Functions.generate_job_id' (Succeeded, Id=a76ce9ad-9219-4a96-af02-14364f2a5a8f, Duration=5ms)
+[2025-04-01T08:19:36.863Z] Executing 'Functions.workflow_orchestrator' (Reason='(null)', Id=85c33f7a-bc99-45a9-871c-914c3b2be1d8)
+[2025-04-01T08:19:36.871Z] Starting execution of workflow: workflow3
+[2025-04-01T08:19:36.873Z] Executed 'Functions.workflow_orchestrator' (Succeeded, Id=85c33f7a-bc99-45a9-871c-914c3b2be1d8, Duration=10ms)
+[2025-04-01T08:19:36.892Z] Executing 'Functions.job_orchestrator' (Reason='(null)', Id=4e4d24bb-6f5a-4ef4-9eba-d632e71681bb)
+[2025-04-01T08:19:36.898Z] Executing job_orchestrator for step: stepE
+[2025-04-01T08:19:36.898Z] Executed 'Functions.job_orchestrator' (Succeeded, Id=4e4d24bb-6f5a-4ef4-9eba-d632e71681bb, Duration=6ms)
+[2025-04-01T08:19:36.913Z] Executing 'Functions.job_runner_activity' (Reason='(null)', Id=8213a679-b1be-4b63-a456-fd1bbdc04ba9)
+[2025-04-01T08:19:36.916Z] Running step: stepE
+[2025-04-01T08:19:38.919Z] Executed 'Functions.job_runner_activity' (Succeeded, Id=8213a679-b1be-4b63-a456-fd1bbdc04ba9, Duration=2007ms)
+[2025-04-01T08:19:38.944Z] Executing 'Functions.job_orchestrator' (Reason='(null)', Id=02113b6f-31dc-4040-99cd-afe7f0af6c3f)
+[2025-04-01T08:19:38.949Z] Executing job_orchestrator for step: stepE
+[2025-04-01T08:19:38.950Z] Executed 'Functions.job_orchestrator' (Succeeded, Id=02113b6f-31dc-4040-99cd-afe7f0af6c3f, Duration=6ms)
+[2025-04-01T08:19:38.964Z] Executing 'Functions.workflow_orchestrator' (Reason='(null)', Id=6ab07671-246d-4898-8494-457debadb598)
+[2025-04-01T08:19:38.972Z] Starting execution of workflow: workflow3
+[2025-04-01T08:19:38.973Z] Executed 'Functions.workflow_orchestrator' (Succeeded, Id=6ab07671-246d-4898-8494-457debadb598, Duration=9ms)
+[2025-04-01T08:19:38.985Z] Executing 'Functions.generate_job_id' (Reason='(null)', Id=a23213eb-0799-428a-83f6-e83d107d3d49)
+[2025-04-01T08:19:38.988Z] Generating job id for step: stepF
+[2025-04-01T08:19:38.988Z] Executed 'Functions.generate_job_id' (Succeeded, Id=a23213eb-0799-428a-83f6-e83d107d3d49, Duration=3ms)
+[2025-04-01T08:19:39.002Z] Executing 'Functions.workflow_orchestrator' (Reason='(null)', Id=c7562a42-7eac-41d5-b164-5563897ab3f0)
+[2025-04-01T08:19:39.010Z] Starting execution of workflow: workflow3
+[2025-04-01T08:19:39.012Z] Executed 'Functions.workflow_orchestrator' (Succeeded, Id=c7562a42-7eac-41d5-b164-5563897ab3f0, Duration=9ms)
+[2025-04-01T08:19:39.029Z] Executing 'Functions.job_orchestrator' (Reason='(null)', Id=301da1b4-e710-419c-87f9-d5c26557bc50)
+[2025-04-01T08:19:39.034Z] Executing job_orchestrator for step: stepF
+[2025-04-01T08:19:39.034Z] Executed 'Functions.job_orchestrator' (Succeeded, Id=301da1b4-e710-419c-87f9-d5c26557bc50, Duration=6ms)
+[2025-04-01T08:19:39.049Z] Executing 'Functions.job_runner_activity' (Reason='(null)', Id=e96dc552-7b40-4b84-970e-f8e0fc786c7d)
+[2025-04-01T08:19:39.051Z] Running step: stepF
+[2025-04-01T08:19:41.055Z] Executed 'Functions.job_runner_activity' (Succeeded, Id=e96dc552-7b40-4b84-970e-f8e0fc786c7d, Duration=2006ms)
+[2025-04-01T08:19:41.081Z] Executing 'Functions.job_orchestrator' (Reason='(null)', Id=ba3da065-b00e-401c-9394-45cfac390735)
+[2025-04-01T08:19:41.085Z] Executing job_orchestrator for step: stepF
+[2025-04-01T08:19:41.086Z] Executed 'Functions.job_orchestrator' (Succeeded, Id=ba3da065-b00e-401c-9394-45cfac390735, Duration=4ms)
+[2025-04-01T08:19:41.098Z] Executing 'Functions.workflow_orchestrator' (Reason='(null)', Id=c8289ef5-5598-4ad1-ad33-b80dc50037a9)
+[2025-04-01T08:19:41.106Z] Starting execution of workflow: workflow3
+[2025-04-01T08:19:41.107Z] Executed 'Functions.workflow_orchestrator' (Succeeded, Id=c8289ef5-5598-4ad1-ad33-b80dc50037a9, Duration=8ms)
+[2025-04-01T08:19:41.122Z] Executing 'Functions.generate_job_id' (Reason='(null)', Id=28b64c66-2b64-4be7-a36d-dbda47491dd7)
+[2025-04-01T08:19:41.125Z] Generating job id for step: stepG
+[2025-04-01T08:19:41.125Z] Executed 'Functions.generate_job_id' (Succeeded, Id=28b64c66-2b64-4be7-a36d-dbda47491dd7, Duration=3ms)
+[2025-04-01T08:19:41.137Z] Executing 'Functions.workflow_orchestrator' (Reason='(null)', Id=921e853e-5de0-4294-8b87-6464f3205619)
+[2025-04-01T08:19:41.151Z] Starting execution of workflow: workflow3
+[2025-04-01T08:19:41.152Z] Executed 'Functions.workflow_orchestrator' (Succeeded, Id=921e853e-5de0-4294-8b87-6464f3205619, Duration=16ms)
+[2025-04-01T08:19:41.167Z] Executing 'Functions.generate_job_id' (Reason='(null)', Id=58f0e6fe-8f09-41fa-b96e-61c3069475cb)
+[2025-04-01T08:19:41.171Z] Generating job id for step: stepH
+[2025-04-01T08:19:41.172Z] Executed 'Functions.generate_job_id' (Succeeded, Id=58f0e6fe-8f09-41fa-b96e-61c3069475cb, Duration=4ms)
+[2025-04-01T08:19:41.186Z] Executing 'Functions.workflow_orchestrator' (Reason='(null)', Id=d287431c-e36c-42e7-a3b2-d0c49eda6a84)
+[2025-04-01T08:19:41.195Z] Starting execution of workflow: workflow3
+[2025-04-01T08:19:41.197Z] Executed 'Functions.workflow_orchestrator' (Succeeded, Id=d287431c-e36c-42e7-a3b2-d0c49eda6a84, Duration=11ms)
+[2025-04-01T08:19:41.212Z] Executing 'Functions.job_orchestrator' (Reason='(null)', Id=8c63fab6-ccd8-4b55-ac70-c59d1edeba0e)
+[2025-04-01T08:19:41.216Z] Executing job_orchestrator for step: stepG
+[2025-04-01T08:19:41.217Z] Executed 'Functions.job_orchestrator' (Succeeded, Id=8c63fab6-ccd8-4b55-ac70-c59d1edeba0e, Duration=4ms)
+[2025-04-01T08:19:41.217Z] Executing 'Functions.job_orchestrator' (Reason='(null)', Id=34479850-e83c-4490-8a8b-c75ea0266fe4)
+[2025-04-01T08:19:41.220Z] Executing job_orchestrator for step: stepH
+[2025-04-01T08:19:41.221Z] Executed 'Functions.job_orchestrator' (Succeeded, Id=34479850-e83c-4490-8a8b-c75ea0266fe4, Duration=4ms)
+[2025-04-01T08:19:41.228Z] Executing 'Functions.job_runner_activity' (Reason='(null)', Id=3546d4b0-608a-49b9-97eb-e132bc261be5)
+[2025-04-01T08:19:41.230Z] Running step: stepG
+[2025-04-01T08:19:41.242Z] Executing 'Functions.job_runner_activity' (Reason='(null)', Id=a4de9750-f3a0-48c6-9876-cc6f53cfa9cf)
+[2025-04-01T08:19:41.246Z] Running step: stepH
+[2025-04-01T08:19:43.234Z] Executed 'Functions.job_runner_activity' (Succeeded, Id=3546d4b0-608a-49b9-97eb-e132bc261be5, Duration=2006ms)
+[2025-04-01T08:19:43.247Z] Executing 'Functions.job_orchestrator' (Reason='(null)', Id=105a6dee-3c37-4305-9972-2143f3405cc4)
+[2025-04-01T08:19:43.248Z] Executed 'Functions.job_runner_activity' (Succeeded, Id=a4de9750-f3a0-48c6-9876-cc6f53cfa9cf, Duration=2006ms)
+[2025-04-01T08:19:43.251Z] Executing job_orchestrator for step: stepG
+[2025-04-01T08:19:43.253Z] Executed 'Functions.job_orchestrator' (Succeeded, Id=105a6dee-3c37-4305-9972-2143f3405cc4, Duration=6ms)
+[2025-04-01T08:19:43.263Z] Executing 'Functions.job_orchestrator' (Reason='(null)', Id=b8ee9ed3-18c5-47f2-99d5-a35148d8c81a)
+[2025-04-01T08:19:43.266Z] Executing job_orchestrator for step: stepH
+[2025-04-01T08:19:43.267Z] Executed 'Functions.job_orchestrator' (Succeeded, Id=b8ee9ed3-18c5-47f2-99d5-a35148d8c81a, Duration=4ms)
+[2025-04-01T08:19:43.267Z] Executing 'Functions.workflow_orchestrator' (Reason='(null)', Id=513b9c99-88e1-4fa2-b932-c4c055b90bb7)
+[2025-04-01T08:19:43.276Z] Starting execution of workflow: workflow3
+[2025-04-01T08:19:43.278Z] Executed 'Functions.workflow_orchestrator' (Succeeded, Id=513b9c99-88e1-4fa2-b932-c4c055b90bb7, Duration=10ms)
+[2025-04-01T08:19:43.333Z] Executing 'Functions.workflow_orchestrator' (Reason='(null)', Id=a2940d38-35e8-41ef-a29c-c67104f60ea0)
+[2025-04-01T08:19:43.343Z] Starting execution of workflow: workflow3
+[2025-04-01T08:19:43.345Z] Executed 'Functions.workflow_orchestrator' (Succeeded, Id=a2940d38-35e8-41ef-a29c-c67104f60ea0, Duration=12ms)
+[2025-04-01T08:19:50.573Z] Detaching gRPC logging due to exception.
+[2025-04-01T08:19:50.577Z] Traceback (most recent call last):
+[2025-04-01T08:19:50.577Z]   File "/usr/lib/azure-functions-core-tools-4/workers/python/3.10/LINUX/X64/worker.py", line 68, in <module>
+[2025-04-01T08:19:50.577Z]     main.main()
+[2025-04-01T08:19:50.577Z]   File "/usr/lib/azure-functions-core-tools-4/workers/python/3.10/LINUX/X64/azure_functions_worker/main.py", line 61, in main
+[2025-04-01T08:19:50.577Z]     return asyncio.run(start_async(
+[2025-04-01T08:19:50.577Z]   File "/usr/lib/python3.10/asyncio/runners.py", line 44, in run
+[2025-04-01T08:19:50.577Z]     return loop.run_until_complete(main)
+[2025-04-01T08:19:50.577Z]   File "/usr/lib/python3.10/asyncio/base_events.py", line 636, in run_until_complete
+[2025-04-01T08:19:50.577Z]     self.run_forever()
+[2025-04-01T08:19:50.577Z]   File "/usr/lib/python3.10/asyncio/base_events.py", line 603, in run_forever
+[2025-04-01T08:19:50.578Z]     self._run_once()
+[2025-04-01T08:19:50.578Z]   File "/usr/lib/python3.10/asyncio/base_events.py", line 1871, in _run_once
+[2025-04-01T08:19:50.578Z]     event_list = self._selector.select(timeout)
+[2025-04-01T08:19:50.578Z]   File "/usr/lib/python3.10/selectors.py", line 469, in select
+[2025-04-01T08:19:50.578Z]     fd_event_list = self._selector.poll(timeout, max_ev)
+[2025-04-01T08:19:50.578Z] KeyboardInterrupt
